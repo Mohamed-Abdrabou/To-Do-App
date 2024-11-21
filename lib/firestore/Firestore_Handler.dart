@@ -47,8 +47,17 @@ class FirestoreHandler {
       var tasksList = snapshot.docs.map((Snapshot) => Snapshot.data()).toList();
       return tasksList;
   }
-  static Stream<List<Task>> getTasksListen(String userId)async*{
-    var collection = getTaskCollection(userId);
+  static Stream<List<Task>> getTasksListen(String userId,DateTime selectedDate)async*{
+    var newDate = selectedDate.copyWith(
+      hour: 0,
+      minute: 0,
+      microsecond: 0,
+      second: 0,
+      millisecond: 0
+    );
+    var collection = getTaskCollection(userId).where(
+      "date",isEqualTo: Timestamp.fromDate(newDate)
+    );
     var taskQuerysnapshot = await collection.snapshots();
     var listTaskStream = taskQuerysnapshot.map((event) => event.docs.map((event)=> event.data()).toList());
     yield* listTaskStream;

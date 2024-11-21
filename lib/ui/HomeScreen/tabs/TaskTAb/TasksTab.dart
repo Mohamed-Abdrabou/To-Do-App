@@ -6,14 +6,15 @@ import 'package:todoapp/ui/HomeScreen/tabs/TaskTAb/widgets/TaskItem.dart';
 import '../../../../firestore/model/Task.dart';
 
 class TasksTab extends StatelessWidget {
+  DateTime selectedDate;
   static const routeName = "Tasks";
-  const TasksTab({super.key});
+  TasksTab(this.selectedDate);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return StreamBuilder(
-        stream: FirestoreHandler.getTasksListen(FirebaseAuth.instance.currentUser!.uid),
+        stream: FirestoreHandler.getTasksListen(FirebaseAuth.instance.currentUser!.uid,selectedDate),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
             return Center(

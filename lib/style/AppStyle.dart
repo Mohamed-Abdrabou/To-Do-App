@@ -9,7 +9,7 @@ class AppStyle {
         backgroundColor: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.lightBackground,
     appBarTheme: AppBarTheme(
-        toolbarHeight: 120,
+        toolbarHeight: 140,
         titleTextStyle: TextStyle(
             color: Colors.white,
             fontFamily: "Poppins",

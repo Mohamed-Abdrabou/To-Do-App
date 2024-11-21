@@ -1,3 +1,4 @@
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/ui/HomeScreen/tabs/SettingsTab.dart';
@@ -14,27 +15,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
-
-  List<Widget> tabs = [TasksTab(), SettingsTab()];
-
+  DateTime selectedDate =DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("To Do List"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  LoginScreen.routeName,
-                  (route) => false,
-                );
-              },
-              icon: Icon(Icons.logout))
-        ],
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
@@ -65,7 +49,67 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(icon: Icon(Icons.settings), label: "")
             ]),
       ),
-      body: tabs[index],
+      body: Column(children: [
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.bottomCenter,
+          children: [AppBar(
+            title: Text("To Do List"),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      LoginScreen.routeName,
+                          (route) => false,
+                    );
+                  },
+                  icon: Icon(Icons.logout))
+            ],
+          ),
+          Positioned(
+            right: 0,
+            left: 0,
+            bottom: -30,
+            child: Visibility(
+              visible: index==0,
+              child: EasyInfiniteDateTimeLine(
+                showTimelineHeader: false,
+                dayProps: EasyDayProps(
+                  width: 58,
+                  height: 79,
+                  todayStyle: DayStyle(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      )
+                  ),
+                  inactiveDayStyle: DayStyle(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  )
+                ),
+                focusDate: selectedDate,
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(Duration(days:365)),
+                onDateChange: (newDate) {
+                  setState(() {
+                    selectedDate = newDate;
+                  });
+                },
+              ),
+            ),
+          )
+          ]
+        ),
+        Expanded(child: index== 0
+            ?TasksTab(selectedDate)
+            :SettingsTab()
+        ),
+      ]),
     );
   }
 }
