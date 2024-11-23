@@ -38,7 +38,7 @@ class _AddTAskBottomSheetState extends State<AddTAskBottomSheet> {
     return Form(
       key: formKe,
       child: Padding(
-        
+
         padding: EdgeInsets.only(
           right: 16,
           left: 16,
@@ -70,7 +70,7 @@ class _AddTAskBottomSheetState extends State<AddTAskBottomSheet> {
               height: 0.02*height,
             ),
             Customformfield(
-                label: "Enter the task description of task",
+                label: "Enter the description of task",
                 keybord: TextInputType.text,
                 validate: (value){
                   if(value == null || value.isEmpty){

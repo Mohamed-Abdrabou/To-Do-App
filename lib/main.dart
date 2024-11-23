@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/style/AppStyle.dart';
 import 'package:todoapp/ui/HomeScreen/HomeScreen.dart';
+import 'package:todoapp/ui/HomeScreen/widgets/Edit_Task.dart';
 import 'package:todoapp/ui/Login_Screen/login_Screen.dart';
 import 'package:todoapp/ui/Splash_Screen/Splash_Screen.dart';
 import 'package:todoapp/ui/register/register_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (_) => LoginScreen(),
         RegisterScreen.routeName: (_) => RegisterScreen(),
         HomeScreen.routeName: (_) => HomeScreen(),
-        SplashScreen.routeName: (_)=> SplashScreen()
+        SplashScreen.routeName: (_)=> SplashScreen(),
+        EditTask.routeName : (_)=> EditTask()
       },
     );
   }

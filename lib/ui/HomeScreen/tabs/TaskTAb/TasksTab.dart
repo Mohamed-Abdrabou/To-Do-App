@@ -30,11 +30,11 @@ class TasksTab extends StatelessWidget {
           }
           List<Task> tasks = snapshot.data??[];
           return Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(top: 30,left: 10,right: 10,bottom: 10),
             child: ListView.separated(
               itemBuilder: (context, index) => TaskItem(task: tasks[index],),
               separatorBuilder: (context, index) => SizedBox(
-                  height:0.02*height
+                  height:0.017*height
               ),
               itemCount: tasks.length,
             ),

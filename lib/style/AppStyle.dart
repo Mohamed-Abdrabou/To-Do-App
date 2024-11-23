@@ -17,19 +17,24 @@ class AppStyle {
             fontSize: 22),
         iconTheme: IconThemeData(color: Colors.white)),
     textTheme: TextTheme(
-      titleSmall: TextStyle(
-        fontFamily: "Poppins",
-        color: Colors.black,
-        fontSize: 18,
-        fontWeight: FontWeight.w700
-      ),
+        titleMedium: TextStyle(
+            fontFamily: "Poppins",
+            color: Colors.green,
+            fontSize: 18,
+            fontWeight: FontWeight.w700),
+        titleSmall: TextStyle(
+            fontFamily: "Poppins",
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w700),
         labelSmall: TextStyle(
-      color: Colors.black,
-      fontSize: 12,
-    )),
+          color: Colors.black,
+          fontSize: 12,
+        )),
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.deepPurple,
       primary: AppColors.lightPrimary,
+      secondary: AppColors.secondary
     ),
     useMaterial3: false,
   );

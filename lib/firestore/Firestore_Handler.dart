@@ -66,4 +66,18 @@ class FirestoreHandler {
     var collection = getTaskCollection(userId);
     return collection.doc(taskId).delete();
   }
+  static Future<void> editIsDone (String userId , String taskId,bool isDone)async {
+    var collection = getTaskCollection(userId);
+    return collection.doc(taskId).update({
+      "isDone":isDone
+    });
+  }
+  static Future<void> editTask(String userId , String taskId , Task task){
+    var collection =getTaskCollection(userId);
+    return collection.doc(taskId).update({
+      "title":task.title,
+      "description":task.description,
+      "date":task.date,
+    });
+  }
 }
